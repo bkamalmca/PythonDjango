@@ -62,5 +62,33 @@ Django Profiles Rest API project
    2. http://127.0.0.1:8080/api/hello-viewset/1
 
 # Create Profile APIs
-* Handle registration of new users nd validate profile data
+* Handle registration of new users and validate profile data
 * Listing existing profiles
+* View specific profiles
+* Update profile of user
+* Delete user
+* URL - /api/profile - List (GET), New (POST)
+* /api/profile/<profile_id> - GET, update (PUT/PATCH), DELETE
+1. Create a new user profile serializer class in serializer.py
+   1. from profiles_api import models 
+   2. class meta, functions - create, update(password hashing)
+2. Create a user profile viewset in views.py
+   1. from profiles_api import models
+   2. use ModelViewSet to connect serializer and provide query set to ModelViewSet
+3. Register profile viewset in urls.py
+4. Test creating a profile
+   1. http://127.0.0.1:8080/api/profile
+   2. http://127.0.0.1:8080/api/profile/1
+5. Create permission class (permissions.py)
+   1. Only the user can change their own profile
+   2. create class UpdateOwnProfile
+6. Add authentication and permissions to viewset
+   1. Import authentication in views.py and permissions
+   2. Add auth class in UserProfileViewSet
+   3. Add permission class 
+7. Test new permissions
+8. Add search profiles feature
+9. Test searching profiles
+
+# Create login API
+
