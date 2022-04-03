@@ -16,7 +16,7 @@ Prerequisite is little knowledge about rest api and python.
   * (base) (venv) PS C:\Users\kamalakannan.x.balak\PythonDjango\profiles-rest-api> django-admin startproject profiles_project .
   * (base) (venv) PS C:\Users\kamalakannan.x.balak\PythonDjango\profiles-rest-api> python .\manage.py startapp profiles_api
 
-## Setup project apps
+## Setup project apps and Database
 1. Add the below in settings.py  
  `rest_framework`    
  `rest_framework.authtoken`    
@@ -24,6 +24,9 @@ Prerequisite is little knowledge about rest api and python.
 2. Run the server  
    `python manage.py runserver 8080`
 3. Update the code as given in models.py
+   1. Configure the db store in models and no need for sql
+   2. Each model is mapped to table
+   3. Create UserProfile and UserProfileManager in models.py
 4. Update the settings.py  
    `AUTH_USER_MODEL = 'profiles_api.UserProfile'`
 5. Create migrations to create db tables 
@@ -31,26 +34,39 @@ Prerequisite is little knowledge about rest api and python.
     `python manage.py migrate`
 
 ## Setup django admin
+Used to manage the user profiles by django admin
 1. Create superuser
    `python manage.py createsuperuser`
 2. Enable django admin - add to admin.py  
+   1. Import admin
+   2. Import models from profiles_api
+   3. Register UserProfile
 3. Test django admin
+   1. http://127.0.0.1:8080/admin/login
 
 ## Create API Views
 * ### Describe logic, uses standard http methods, process files, calling other APIS
 1. Update the file views.py in project profiles_api
-   1. Get method api to display message
+   1. Import APIView and Response 
+   2. Create a class HelloApiView and Get method api to display message
 2. Create a new file - urls.py in project profiles_api
+   1. Import path
+   2. Import views from profiles_api
 3. Update the urls.py in profiles_project to include the new app url
+   1. Setup a hello-view api 
 4. Test the new url in browser
    1. http://127.0.0.1:8080/api/hello-view/
 
 ## Create a serializer and methods
 * ### To convert content into python object and vice versa
 1. Create a new file serializers.py with content
-2. Create a serializer class and create post method in views.py
+   1. Import serializers
+   2. Create a serializer class HelloSerializer
+2. Create a HelloApiView class in views.py
+   1. Import serializers from profiles_api
 3. Create put, post and delete methods
 4. Test the API view
+   1. http://127.0.0.1:8080/api/hello-view/
 
 ## Create a Viewsets (views.py)
 * ### Use for Simple CRUD DB, Datastructures
